@@ -1,47 +1,58 @@
 #include <FastLED.h>
 
-#define LED_PIN 6
-#define NUM_LEDS 256
+#define LED_PIN1 5
+#define NUM_LEDS1 60
 
-//byte RGB[256*3];//take your number of LEDs and multiply by 3
+#define LED_PIN2 6
+#define NUM_LEDS2 255
 
-CRGB leds[NUM_LEDS];
-byte levelTable[255];
+CRGB leds1[NUM_LEDS1];
+CRGB leds2[NUM_LEDS2];
+
+uint8_t gBrightness = 128;
+
+int counter=1;
+
+byte levelTable[256];
 int change = 1;
 int fadeIncremet = 10;
 int currentLevel = 1; // current light level
 
+int i=0;
+boolean fadeUp = true;
+
 void setup() {
-  //pinMode(WS2812_pin, OUTPUT);
+  //pinMode(5,OUTPUT);
   Serial.begin(9600);
-  FastLED.addLeds<SK6812, LED_PIN>(leds, NUM_LEDS);
+  FastLED.addLeds<WS2812B, LED_PIN1>(leds1, NUM_LEDS1);
+  FastLED.addLeds<WS2812B, LED_PIN2>(leds2, NUM_LEDS2);
+  //initGridPosition();
   fillLevelTable();
-}//setup
+}
 
-void loop() {
-  clearAll();
-  //1
-  mapLEDXY(7,7,200,200,255);mapLEDXY(7,8,200,200,255);mapLEDXY(8,7,200,200,255);mapLEDXY(8,8,200,200,255);                    
-  FastLED.show();
-  delay(1000);
-  //2
-  mapLEDXY(5,7,207,60,245);mapLEDXY(6,6,207,60,245);mapLEDXY(6,7,207,60,245);mapLEDXY(6,8,207,60,245);mapLEDXY(7,5,207,60,245);mapLEDXY(7,6,207,60,245);mapLEDXY(7,8,207,60,245);mapLEDXY(7,9,207,60,245);mapLEDXY(8,5,207,60,245);mapLEDXY(8,6,207,60,245);mapLEDXY(8,8,207,60,245);mapLEDXY(8,9,207,60,245);mapLEDXY(9,6,207,60,245);mapLEDXY(9,7,207,60,245);mapLEDXY(9,8,207,60,245);mapLEDXY(10,7,207,60,245);
-  FastLED.show();
-  delay(1000);
-  //3
-  mapLEDXY(3,7,207,60,245);mapLEDXY(4,6,207,60,245);mapLEDXY(4,7,207,60,245);mapLEDXY(4,8,207,60,245);mapLEDXY(5,5,207,60,245);mapLEDXY(5,6,207,60,245);mapLEDXY(5,8,207,60,245);mapLEDXY(5,9,207,60,245);mapLEDXY(6,4,207,60,245);mapLEDXY(6,5,207,60,245);mapLEDXY(6,9,207,60,245);mapLEDXY(6,10,207,60,245);mapLEDXY(7,4,207,60,245);mapLEDXY(7,10,207,60,245);mapLEDXY(8,4,207,60,245);mapLEDXY(8,10,207,60,245);mapLEDXY(9,4,207,60,245);mapLEDXY(9,5,207,60,245);mapLEDXY(9,9,207,60,245);mapLEDXY(9,10,207,60,245);mapLEDXY(10,5,207,60,245);mapLEDXY(10,6,207,60,245);mapLEDXY(10,8,207,60,245);mapLEDXY(10,9,207,60,245);mapLEDXY(11,6,207,60,245);mapLEDXY(11,7,207,60,245);mapLEDXY(11,8,207,60,245);mapLEDXY(12,7,207,60,245);
-  FastLED.show();
-  delay(1000);
-  //
-  clearAll();
-  mapLEDXY(1,1,207,60,245);mapLEDXY(1,5,207,60,245);mapLEDXY(2,2,207,60,245);mapLEDXY(2,4,207,60,245);mapLEDXY(3,3,207,60,245);mapLEDXY(4,2,207,60,245);mapLEDXY(4,4,207,60,245);mapLEDXY(4,12,207,60,245);mapLEDXY(4,13,207,60,245);mapLEDXY(4,14,207,60,245);mapLEDXY(5,1,207,60,245);mapLEDXY(5,5,207,60,245);mapLEDXY(5,9,207,60,245);mapLEDXY(5,12,207,60,245);mapLEDXY(5,14,207,60,245);mapLEDXY(6,8,207,60,245);mapLEDXY(6,9,207,60,245);mapLEDXY(6,12,207,60,245);mapLEDXY(6,14,207,60,245);mapLEDXY(7,7,207,60,245);mapLEDXY(7,8,207,60,245);mapLEDXY(7,9,207,60,245);mapLEDXY(7,12,207,60,245);mapLEDXY(7,14,207,60,245);mapLEDXY(8,8,207,60,245);mapLEDXY(8,9,207,60,245);mapLEDXY(8,12,207,60,245);mapLEDXY(8,14,207,60,245);mapLEDXY(9,1,207,60,245);mapLEDXY(9,5,207,60,245);mapLEDXY(9,9,207,60,245);mapLEDXY(9,12,207,60,245);mapLEDXY(9,14,207,60,245);mapLEDXY(10,2,207,60,245);mapLEDXY(10,4,207,60,245);mapLEDXY(10,12,207,60,245);mapLEDXY(10,13,207,60,245);mapLEDXY(10,14,207,60,245);mapLEDXY(11,3,207,60,245);mapLEDXY(12,2,207,60,245);mapLEDXY(12,4,207,60,245);mapLEDXY(13,1,207,60,245);mapLEDXY(13,5,207,60,245);
-  FastLED.show();
-  delay(1000);
-}//loop
+void loop(){
+  for(i=0;i+2<NUM_LEDS1;i++){
+    leds1[i] = CRGB (207,60,245);
+    leds1[i+1] = CRGB (207,60,245);
+    leds1[i+2] = CRGB (207,60,245);
+    FastLED.show();
+    leds1[i] = CRGB (0,0,0);
+    leds1[i+1] = CRGB (0,0,0);
+    leds1[i+2] = CRGB (0,0,0);
+    
+    fadeMatrix();
+    delay(100);
+  }
+  fadeUp = !fadeUp;
+}
 
-void clearAll(){
-  for(int i=0;i<NUM_LEDS;i++){
-    leds[i] =  CRGB (0,0,0);
+void fadeMatrix(){
+  mapLEDXY(0,5,207,60,245);mapLEDXY(0,6,207,60,245);mapLEDXY(0,7,207,60,245);mapLEDXY(1,4,207,60,245);mapLEDXY(1,5,207,60,245);mapLEDXY(1,6,207,60,245);mapLEDXY(1,7,207,60,245);mapLEDXY(1,8,207,60,245);mapLEDXY(1,9,207,60,245);mapLEDXY(2,3,207,60,245);mapLEDXY(2,4,207,60,245);mapLEDXY(2,5,207,60,245);mapLEDXY(2,6,207,60,245);mapLEDXY(2,7,207,60,245);mapLEDXY(2,8,207,60,245);mapLEDXY(2,9,207,60,245);mapLEDXY(2,10,207,60,245);mapLEDXY(3,2,207,60,245);mapLEDXY(3,3,207,60,245);mapLEDXY(3,4,207,60,245);mapLEDXY(3,5,207,60,245);mapLEDXY(3,6,207,60,245);mapLEDXY(3,7,207,60,245);mapLEDXY(3,8,207,60,245);mapLEDXY(3,9,207,60,245);mapLEDXY(3,10,207,60,245);mapLEDXY(3,11,207,60,245);mapLEDXY(4,1,207,60,245);mapLEDXY(4,2,207,60,245);mapLEDXY(4,3,207,60,245);mapLEDXY(4,4,207,60,245);mapLEDXY(4,5,207,60,245);mapLEDXY(4,6,207,60,245);mapLEDXY(4,7,207,60,245);mapLEDXY(4,8,207,60,245);mapLEDXY(4,9,207,60,245);mapLEDXY(4,10,207,60,245);mapLEDXY(4,11,207,60,245);mapLEDXY(4,12,207,60,245);mapLEDXY(5,1,207,60,245);mapLEDXY(5,2,207,60,245);mapLEDXY(5,3,207,60,245);mapLEDXY(5,4,207,60,245);mapLEDXY(5,5,207,60,245);mapLEDXY(5,6,207,60,245);mapLEDXY(5,7,207,60,245);mapLEDXY(5,8,207,60,245);mapLEDXY(5,9,207,60,245);mapLEDXY(5,10,207,60,245);mapLEDXY(5,11,207,60,245);mapLEDXY(5,12,207,60,245);mapLEDXY(6,1,207,60,245);mapLEDXY(6,2,207,60,245);mapLEDXY(6,3,207,60,245);mapLEDXY(6,4,207,60,245);mapLEDXY(6,5,207,60,245);mapLEDXY(6,6,207,60,245);mapLEDXY(6,7,207,60,245);mapLEDXY(6,8,207,60,245);mapLEDXY(6,9,207,60,245);mapLEDXY(6,10,207,60,245);mapLEDXY(6,11,207,60,245);mapLEDXY(6,12,207,60,245);mapLEDXY(7,1,207,60,245);mapLEDXY(7,2,207,60,245);mapLEDXY(7,3,207,60,245);mapLEDXY(7,4,207,60,245);mapLEDXY(7,5,207,60,245);mapLEDXY(7,6,207,60,245);mapLEDXY(7,7,207,60,245);mapLEDXY(7,8,207,60,245);mapLEDXY(7,9,207,60,245);mapLEDXY(7,10,207,60,245);mapLEDXY(7,11,207,60,245);mapLEDXY(7,12,207,60,245);mapLEDXY(8,1,207,60,245);mapLEDXY(8,2,207,60,245);mapLEDXY(8,3,207,60,245);mapLEDXY(8,4,207,60,245);mapLEDXY(8,5,207,60,245);mapLEDXY(8,6,207,60,245);mapLEDXY(8,7,207,60,245);mapLEDXY(8,8,207,60,245);mapLEDXY(8,9,207,60,245);mapLEDXY(8,10,207,60,245);mapLEDXY(8,11,207,60,245);mapLEDXY(8,12,207,60,245);mapLEDXY(9,1,207,60,245);mapLEDXY(9,2,207,60,245);mapLEDXY(9,3,207,60,245);mapLEDXY(9,4,207,60,245);mapLEDXY(9,5,207,60,245);mapLEDXY(9,6,207,60,245);mapLEDXY(9,7,207,60,245);mapLEDXY(9,8,207,60,245);mapLEDXY(9,9,207,60,245);mapLEDXY(9,10,207,60,245);mapLEDXY(9,11,207,60,245);mapLEDXY(9,12,207,60,245);mapLEDXY(10,2,207,60,245);mapLEDXY(10,3,207,60,245);mapLEDXY(10,4,207,60,245);mapLEDXY(10,5,207,60,245);mapLEDXY(10,6,207,60,245);mapLEDXY(10,7,207,60,245);mapLEDXY(10,8,207,60,245);mapLEDXY(10,9,207,60,245);mapLEDXY(10,10,207,60,245);mapLEDXY(10,11,207,60,245);mapLEDXY(11,3,207,60,245);mapLEDXY(11,4,207,60,245);mapLEDXY(11,5,207,60,245);mapLEDXY(11,6,207,60,245);mapLEDXY(11,7,207,60,245);mapLEDXY(11,8,207,60,245);mapLEDXY(11,9,207,60,245);mapLEDXY(11,10,207,60,245);mapLEDXY(12,4,207,60,245);mapLEDXY(12,5,207,60,245);mapLEDXY(12,6,207,60,245);mapLEDXY(12,7,207,60,245);mapLEDXY(12,8,207,60,245);mapLEDXY(12,9,207,60,245);mapLEDXY(13,5,207,60,245);mapLEDXY(13,6,207,60,245);mapLEDXY(13,7,207,60,245);
+}
+
+void clearMatrix(){
+  for(int i=0;i<NUM_LEDS2;i++){
+     leds2[i] = CRGB (0,0,0);
   }
 }
 
@@ -53,9 +64,16 @@ void mapLEDXY(int x, int y, byte RED, byte GREEN, byte BLUE){
         RGBlocation = 15 - x + y * 16;
     }
     //update rgb
-    Serial.println(RGBlocation);
-    leds[RGBlocation] =  CRGB (RED,GREEN,BLUE);
-    //leds[RGBlocation].fadeLightBy(levelTable[currentLevel]);
+    leds2[RGBlocation] =  CRGB (RED,GREEN,BLUE);
+    //fade by mapping
+    int idx = 0;
+    if(fadeUp){
+      idx = map(i,0,58,0,255);
+    }else{
+      idx = map(i,0,58,200,0);
+    }
+   
+    leds2[RGBlocation].fadeLightBy(levelTable[idx]);
 }
 
 void fillLevelTable(){
