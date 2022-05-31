@@ -22,8 +22,8 @@ byte levelTable2[256];
 /**
  * Buttons light mode button states and color button states
  */
-const int modeButtonPin = 2;
-const int colorButtonPin = 3;
+const int modeButtonPin = 2;    //this button used to control the animation to no animation
+const int colorButtonPin = 3;   //this button used to control the color in animation mode
 
 int modeButtonState = 0;
 int colorButtonState = 0;
@@ -138,7 +138,7 @@ void lightAnimation(){
      
       FastLED.show();
 }
-
+//patterns for led matrix exported from the excel sheet
 void fixtureMatrix(){
   mapLEDXY(1,4,220,220,220);mapLEDXY(1,5,220,220,220);mapLEDXY(1,6,220,220,220);mapLEDXY(1,7,220,220,220);mapLEDXY(1,8,220,220,220);mapLEDXY(1,9,220,220,220);mapLEDXY(1,10,220,220,220);mapLEDXY(2,3,220,220,220);mapLEDXY(2,4,220,220,220);mapLEDXY(2,5,220,220,220);mapLEDXY(2,6,220,220,220);mapLEDXY(2,7,220,220,220);mapLEDXY(2,8,220,220,220);mapLEDXY(2,9,220,220,220);mapLEDXY(2,10,220,220,220);mapLEDXY(2,11,220,220,220);mapLEDXY(3,2,220,220,220);mapLEDXY(3,3,220,220,220);mapLEDXY(3,4,220,220,220);mapLEDXY(3,5,220,220,220);mapLEDXY(3,6,220,220,220);mapLEDXY(3,7,220,220,220);mapLEDXY(3,8,220,220,220);mapLEDXY(3,9,220,220,220);mapLEDXY(3,10,220,220,220);mapLEDXY(3,11,220,220,220);mapLEDXY(3,12,220,220,220);mapLEDXY(4,1,220,220,220);mapLEDXY(4,2,220,220,220);mapLEDXY(4,3,220,220,220);mapLEDXY(4,4,220,220,220);mapLEDXY(4,5,220,220,220);mapLEDXY(4,6,220,220,220);mapLEDXY(4,7,220,220,220);mapLEDXY(4,8,220,220,220);mapLEDXY(4,9,220,220,220);mapLEDXY(4,10,220,220,220);mapLEDXY(4,11,220,220,220);mapLEDXY(4,12,220,220,220);mapLEDXY(4,13,220,220,220);mapLEDXY(5,1,220,220,220);mapLEDXY(5,2,220,220,220);mapLEDXY(5,3,220,220,220);mapLEDXY(5,4,220,220,220);mapLEDXY(5,5,220,220,220);mapLEDXY(5,6,220,220,220);mapLEDXY(5,7,220,220,220);mapLEDXY(5,8,220,220,220);mapLEDXY(5,9,220,220,220);mapLEDXY(5,10,220,220,220);mapLEDXY(5,11,220,220,220);mapLEDXY(5,12,220,220,220);mapLEDXY(5,13,220,220,220);mapLEDXY(6,1,220,220,220);mapLEDXY(6,2,220,220,220);mapLEDXY(6,3,220,220,220);mapLEDXY(6,4,220,220,220);mapLEDXY(6,5,220,220,220);mapLEDXY(6,6,220,220,220);mapLEDXY(6,7,220,220,220);mapLEDXY(6,8,220,220,220);mapLEDXY(6,9,220,220,220);mapLEDXY(6,10,220,220,220);mapLEDXY(6,11,220,220,220);mapLEDXY(6,12,220,220,220);mapLEDXY(6,13,220,220,220);mapLEDXY(7,1,220,220,220);mapLEDXY(7,2,220,220,220);mapLEDXY(7,3,220,220,220);mapLEDXY(7,4,220,220,220);mapLEDXY(7,5,220,220,220);mapLEDXY(7,6,220,220,220);mapLEDXY(7,7,220,220,220);mapLEDXY(7,8,220,220,220);mapLEDXY(7,9,220,220,220);mapLEDXY(7,10,220,220,220);mapLEDXY(7,11,220,220,220);mapLEDXY(7,12,220,220,220);mapLEDXY(7,13,220,220,220);mapLEDXY(8,1,220,220,220);mapLEDXY(8,2,220,220,220);mapLEDXY(8,3,220,220,220);mapLEDXY(8,4,220,220,220);mapLEDXY(8,5,220,220,220);mapLEDXY(8,6,220,220,220);mapLEDXY(8,7,220,220,220);mapLEDXY(8,8,220,220,220);mapLEDXY(8,9,220,220,220);mapLEDXY(8,10,220,220,220);mapLEDXY(8,11,220,220,220);mapLEDXY(8,12,220,220,220);mapLEDXY(8,13,220,220,220);mapLEDXY(9,1,220,220,220);mapLEDXY(9,2,220,220,220);mapLEDXY(9,3,220,220,220);mapLEDXY(9,4,220,220,220);mapLEDXY(9,5,220,220,220);mapLEDXY(9,6,220,220,220);mapLEDXY(9,7,220,220,220);mapLEDXY(9,8,220,220,220);mapLEDXY(9,9,220,220,220);mapLEDXY(9,10,220,220,220);mapLEDXY(9,11,220,220,220);mapLEDXY(9,12,220,220,220);mapLEDXY(9,13,220,220,220);mapLEDXY(10,1,220,220,220);mapLEDXY(10,2,220,220,220);mapLEDXY(10,3,220,220,220);mapLEDXY(10,4,220,220,220);mapLEDXY(10,5,220,220,220);mapLEDXY(10,6,220,220,220);mapLEDXY(10,7,220,220,220);mapLEDXY(10,8,220,220,220);mapLEDXY(10,9,220,220,220);mapLEDXY(10,10,220,220,220);mapLEDXY(10,11,220,220,220);mapLEDXY(10,12,220,220,220);mapLEDXY(10,13,220,220,220);mapLEDXY(11,2,220,220,220);mapLEDXY(11,3,220,220,220);mapLEDXY(11,4,220,220,220);mapLEDXY(11,5,220,220,220);mapLEDXY(11,6,220,220,220);mapLEDXY(11,7,220,220,220);mapLEDXY(11,8,220,220,220);mapLEDXY(11,9,220,220,220);mapLEDXY(11,10,220,220,220);mapLEDXY(11,11,220,220,220);mapLEDXY(11,12,220,220,220);mapLEDXY(12,3,220,220,220);mapLEDXY(12,4,220,220,220);mapLEDXY(12,5,220,220,220);mapLEDXY(12,6,220,220,220);mapLEDXY(12,7,220,220,220);mapLEDXY(12,8,220,220,220);mapLEDXY(12,9,220,220,220);mapLEDXY(12,10,220,220,220);mapLEDXY(12,11,220,220,220);mapLEDXY(13,4,220,220,220);mapLEDXY(13,5,220,220,220);mapLEDXY(13,6,220,220,220);mapLEDXY(13,7,220,220,220);mapLEDXY(13,8,220,220,220);mapLEDXY(13,9,220,220,220);mapLEDXY(13,10,220,220,220);
 }
@@ -162,7 +162,7 @@ void clearMatrix(){
      leds2[i] = CRGB (0,0,0);
   }
 }
-
+//map all leds from matrix
 void mapLEDXY(int x, int y, byte RED, byte GREEN, byte BLUE){
     int RGBlocation = 0;
     if(y % 2 == 0){
@@ -184,19 +184,19 @@ void clearStripe(){
      leds1[i] = CRGB(0,0,0);
   }
 }
-
+//level table for outter stripes
 void fillLevelTable(){
    float maxValue = 255;
   // iterate over the array and calculate the right value for it:
   for (int l = 0; l <= maxValue; l++) {
-    // map input to a 0-179 range:
+    // map input to a 30-100 range:
     float angle = map(l, 0, maxValue, 30, 100);
     //here it all is in one line:
     float lightLevel = (sin((angle * PI / 180) + PI / 2) + 1) * 127.5;
     levelTable[l] = lightLevel;
   }
 } 
-
+//level table for led matrix
 void fillLevelTable2(){
    float maxValue = 255;
   // iterate over the array and calculate the right value for it:
